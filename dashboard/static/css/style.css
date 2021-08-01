@@ -1,0 +1,246 @@
+/* Global Styles
+--------------------------------------*/
+html {
+  box-sizing: border-box;
+}
+/* *, *:before, *:after{
+  box-sizing: inherit; */
+  body {
+    color: #191919;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1;
+  }
+  img {
+    width: 100px;
+    float: right;
+  }
+  a {
+    color: #FFE66D;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  h1 {
+    font-size: 45px;
+    line-height: 1;
+  }
+  h2 {
+    font-size: 25px;
+    text-align: center;
+  }
+  h1, h2 {
+    font-family: Georgia , serif;
+    font-weight: 100;
+    margin: 0;
+
+  }
+  .vehicle-class {
+    background: #D4CB92;
+    border-radius: 5px;
+    padding: 2px 5px 2px 5px;
+  }
+  .content-wrap {
+    max-width: 800px;
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+
+  .left-query {
+    background-color: #EDBF34;
+    width: 20%;
+    float: left;
+  }
+  .right-query {
+    background-color: #EFCA0E;
+    width: 80%;
+    /*height: 10%;*/
+    float: left;
+  }
+
+/* header */
+header {
+  background: #E69509;
+  color: #45050C;
+}
+
+
+/* ===============================Dropdown================================== */
+.dropbtn {
+  background-color: #D4CB92;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border-color: #60552B;
+  border-radius: 5px 5px 5px 5px;
+  box-shadow: 10px 5px 5px #7F6E33;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding-left: 15px;
+  padding-top: 15px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #D3E605;}
+
+/* datetime */
+
+.datetime-item{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* =============================Checkbox====================================*/
+/* The container */
+.container {
+display: block;
+position: relative;
+padding-left: 30px;
+margin-bottom: 12px;
+cursor: pointer;
+font-size: 16px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.vehicle-checkbox {
+  padding-left: 15px;
+}
+
+.container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+height: 0;
+width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+left: 5px;
+top: 2px;
+width: 5px;
+height: 12px;
+border: solid white;
+border-width: 0 3px 3px 0;
+-webkit-transform: rotate(45deg);
+-ms-transform: rotate(45deg);
+transform: rotate(45deg);
+}
+/* ============================get data Button===================================== */
+.get-data-button {
+  padding-left: 60px;
+}
+.styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 5px 25px 5px 25px;
+    font-size: 16px;
+    text-align: center;
+    color: black;
+    border-radius: 8px;
+    background-color: #E8EF0E;
+}
+
+.styled:hover {
+    background-color: #E8EF0E;
+}
+
+
+/* ================graph types ==================*/
+
+
+
+.graph-checkbox{
+  padding-left: 15px;
+}
+
+.graph-type {
+  display: inline-block;
+  padding-right: 15px;
+}
+
+.generate-graphs-button {
+  padding-left: 60px;
+  display: inline-block;
+}
+
+.bottom-right{
+  padding-left: 15px;
+  /*padding-top: 5px;*/
+
+  /*position:absolute;
+  display: inline-block;*/
+  border: 1px;
+}
+
+.vis_graph
+{
+  width: 80%;
+  border: 2px solid green;
+  padding: 50px;
+  margin: 20px;
+
+}

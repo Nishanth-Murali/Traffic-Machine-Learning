@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Queries and Visualizations</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src= "{% static 'scripts/graficarBarras.js'  %}"></script>
+    <script type="text/javascript" src= "{% static 'scripts/tabla2array.js'  %}"></script>
+</head>
+<body>
+  <main>
+    <!-- *************************** Header *****************************-->
+    <header>
+      <div class="content-wrap">
+        <img src="{% static 'images/tempelogo.png' %}" alt="Logo of City of Tempe">
+        <h1>TEMPE TRAFFIC DASHBOARD</h1>
+        <h2> Traffic Data Analysis</h2>
+      </div>
+    </header>
+
+    <!-- *********Vendor, Intersection and Vehicle Class Selection***********-->
+    <!-- **********Start date time and End date time Selection***********-->
+      <section class="dashboard-queries">
+
+      <form action = "" method = "POST">
+        {% csrf_token %}
+
+          <div class='left-query'>
+              <label for="vendors">Select Vendor:</label>
+                <select id="vendors" name="vendors">
+                  <option value="gridsmart">GRIDSMART</option>
+                  <option value="miovision">Miovision</option>
+                  <option value="econolite">Econolite</option>
+                  <option value="itsplus">ITS Plus</option>
+
+                </select>
+            <div class="datetime-selector">
+
+              <!-- Start date -->
+              <section class="datetime-item">
+                <label for="start">Start date:</label>
+                <input class="time" type="date" id="start_trip" name="trip-start"
+                  value="2019-01-01"
+                  min="2019-01-01">
+              </section>
+              <!-- Start time -->
+              <section class="datetime-item">
+                <label for="appt">Start time:</label>
+                <input type="time" id="appt_start" name="appt-start"
+                  min="00:00" max="23:59">
+                <small>MST</small>
+              </section>
+              <!-- End date -->
+              <section class="datetime-item">
+                <label for="start">End date:</label>
+                <input class="time" type="date" id="end_trip" name="trip-end"
+                  value="2019-01-01"
+                  min="2019-01-01">
+              </section>
+              <!-- End time -->
+              <section class="datetime-item">
+                <label for="appt">End time:</label>
+                <input type="time" id="appt_end" name="appt-end"
+                  min="00:00" max="23:59">
+                <small>MST</small>
+              </section>
+            </div>
+
+                <label for="vendors">Select Intersection:</label>
+                <select id="Intersection" name="Intersection">
+                  <option value="road1">East University Drive & South Myrtle Avenue</option>
+                  <option value="road2">East University Drive & South Forest Avenue</option>
+                  <option value="road3">East University Drive & South College Avenue</option>
+                  <option value="road4">East Apache Boulevard & South College Avenue</option>
+                    <option value="road5">East Apache Boulevard & South College Avenue</option>
+
+                </select>
+
+            <div class="vehicle-checkbox">
+              <h3><span class="vehicle-class">Vehicle Class</span></h3>
+              <label class="container">Articulated Truck
+                <input type="checkbox" name="checkbox" checked="checked" value="Articulated Truck">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Bus
+                <input type="checkbox" name="checkbox" value="Bus">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Light
+                <input type="checkbox" name="checkbox" value="Light">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Single Unit Truck
+                <input type="checkbox" name="checkbox" value="Single Unit Truck">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Motorized Vehicle
+                <input type="checkbox" name="checkbox" value="Motorized Vehicle">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="get-data-button" id="get-data-button">
+              <input type="submit" id="actionButton" href="#" class="styled"
+                data-loading="Working.." data-finished="Finished!"
+                data-type="background-bar" value="Get Data"></input>
+            </div>
+          </div>
+
+      <!-- **********Right side of web page ************-->
+      <div class="right-query">
+        <div class="graph-checkbox">
+          <h3><span class="vehicle-class">Choose Graph</span></h3>
+          <li class="graph-type">
+            <label class="container">Bar Graph
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li class="graph-type">
+            <label class="container">Line Chart
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li class="graph-type">
+            <label class="container">Pie Chart
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li class="graph-type">
+            <label class="container">Funnel Chart
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <li class="graph-type">
+            <label class="container">Stacked Graph
+              <input type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+          </li>
+          <div class="generate-graphs-button">
+            <a id="actionButton" href="#" class="styled"
+              data-loading="Working.." data-finished="Finished!"
+              data-type="background-bar">Generate Graphs</a>
+
+          </div>
+        </div>
+          <div class="bottom-right">
+              <div class="vis_graph">
+              <canvas id="chart" width="960" height="480" style="border: 1px solid black;">Canvas is not supported</canvas>
+{#                  <table id="myTable">#}
+{#	<thead>#}
+{#		<tr>#}
+{#			<th></th>#}
+{#			<th>Canada</th>#}
+{#			<th>USA</th>#}
+{#			<th>Mexico</th>#}
+{#			<th>Venezuela</th>#}
+{#		</tr>#}
+{#	</thead>#}
+{#	<tbody>#}
+{#		<tr>#}
+{#			<td>Male</td>#}
+{#			<td>1685</td>#}
+{#			<td>734</td>#}
+{#			<td>278</td>#}
+{#			<td>1582</td>#}
+{#		</tr>#}
+{#		<tr>#}
+{#			<td>Female</td>#}
+{#			<td>1521</td>#}
+{#			<td>509</td>#}
+{#			<td>210</td>#}
+{#			<td>1344</td>#}
+{#		</tr>#}
+{#	</tbody>#}
+{#</table>#}
+
+                    <div style="display:none">
+                  <table id="myTable" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+                                     {% if key == 'EE' %}
+                                         {% for k in value.keys %}
+                                            <th> {{ k }} </th>
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+                          <td> {{ key }}</td>
+                             {% for v in value.values %}
+
+                             <td> {{ v }} </td>
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+                    </div>
+
+
+              </div>
+          </div>
+
+      </div>      </form>
+    </section>
+
+  </main>
+<script type="text/javascript">
+    var misParam ={
+        miMargen : 0.80,
+        separZonas : 0.0005,
+        tituloGraf : "Number of Vehicles moving from Direction A to Direction B",
+        tituloEjeX : "Direction (Inflow to Outflow)",
+        tituloEjeY : "Count of Number of Vehicles",
+        nLineasDiv : 10,
+        mysColores :[
+                        ["rgba(93,18,18,1)","rgba(196,19,24,1)"],  //red
+                        ["rgba(171,115,51,1)","rgba(251,163,1,1)"], //yellow
+                    ],
+        anchoLinea : 2,
+    };
+
+    obtener_datos_tabla_convertir_en_array('myTable',graficarBarras,'chart','960','480',misParam,true);
+</script>
+</body>
+</html>
