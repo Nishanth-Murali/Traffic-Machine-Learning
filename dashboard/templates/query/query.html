@@ -12,6 +12,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src= "{% static 'scripts/graficarBarras.js'  %}"></script>
     <script type="text/javascript" src= "{% static 'scripts/tabla2array.js'  %}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
 </head>
 <body>
   <main>
@@ -156,35 +161,22 @@
           <div class="bottom-right">
               <div class="vis_graph">
               <canvas id="chart" width="960" height="480" style="border: 1px solid black;">Canvas is not supported</canvas>
-{#                  <table id="myTable">#}
-{#	<thead>#}
-{#		<tr>#}
-{#			<th></th>#}
-{#			<th>Canada</th>#}
-{#			<th>USA</th>#}
-{#			<th>Mexico</th>#}
-{#			<th>Venezuela</th>#}
-{#		</tr>#}
-{#	</thead>#}
-{#	<tbody>#}
-{#		<tr>#}
-{#			<td>Male</td>#}
-{#			<td>1685</td>#}
-{#			<td>734</td>#}
-{#			<td>278</td>#}
-{#			<td>1582</td>#}
-{#		</tr>#}
-{#		<tr>#}
-{#			<td>Female</td>#}
-{#			<td>1521</td>#}
-{#			<td>509</td>#}
-{#			<td>210</td>#}
-{#			<td>1344</td>#}
-{#		</tr>#}
-{#	</tbody>#}
-{#</table>#}
+              <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <hr style="border: none">
 
-                    <div style="display:none">
+              <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <hr style="border: none">
+
+               <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <hr style="border: none">
+
+              <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <hr style="border: none">
+
+               <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <hr style="border: none">
+
+              <div style="display:none">
                   <table id="myTable" >
                       <!-- table header -->
                       {% if data %}
@@ -217,6 +209,196 @@
                     </table>
                     </div>
 
+              <div style="display:none">
+                  <table id="myTable1" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+
+                                     {% if key == 'EE'  %}
+                                         {% for k in value.keys %}
+                                             {% if k == 'Light'  %}
+                                            <th> {{ k }} </th>
+                                             {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+                              <td> {{ key }}</td>
+                             {% for k,v in value.items %}
+                                 {% if k == 'Light' %}
+                             <td> {{ v }} </td>
+                                 {% endif %}
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+
+                    </div>
+              <div style="display:none">
+                  <table id="myTable2" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+
+                                     {% if key == 'EE'  %}
+                                         {% for k in value.keys %}
+                                             {% if k == 'Bus'  %}
+                                            <th> {{ k }} </th>
+                                             {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+
+                          <td> {{ key }}</td>
+                             {% for k,v in value.items %}
+                                 {% if k == 'Bus' %}
+                             <td> {{ v }} </td>
+                                 {% endif %}
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+                    </div>
+              <div style="display:none">
+                  <table id="myTable3" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+
+                                     {% if key == 'EE'  %}
+                                         {% for k in value.keys %}
+                                             {% if k == 'ArticulatedTruck'  %}
+                                            <th> {{ k }} </th>
+                                             {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+
+                          <td> {{ key }}</td>
+                             {% for k,v in value.items %}
+                                 {% if k == 'ArticulatedTruck' %}
+                             <td> {{ v }} </td>
+                                 {% endif %}
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+                    </div>
+              <div style="display:none">
+                  <table id="myTable4" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+
+                                     {% if key == 'EE'  %}
+                                         {% for k in value.keys %}
+                                             {% if k == 'SingleUnitTruck'  %}
+                                            <th> {{ k }} </th>
+                                             {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+
+                          <td> {{ key }}</td>
+                             {% for k,v in value.items %}
+                                 {% if k == 'SingleUnitTruck' %}
+                             <td> {{ v }} </td>
+                                 {% endif %}
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+                    </div>
+              <div style="display:none">
+                  <table id="myTable5" >
+                      <!-- table header -->
+                      {% if data %}
+                          <thead>
+                              <tr>
+                              <th></th>
+                                 {% for key,value in data.items %}
+
+                                     {% if key == 'EE'  %}
+                                         {% for k in value.keys %}
+                                             {% if k == 'Bicycle'  %}
+                                            <th> {{ k }} </th>
+                                             {% endif %}
+                                     {% endfor %}
+                                     {% endif %}
+                              {% endfor %}
+                              </tr>
+                          </thead>
+                      {% endif %}
+
+                      <!-- table rows -->
+                        <tbody>
+                          {% for key,value in data.items %}
+                          <tr>
+
+                          <td> {{ key }}</td>
+                             {% for k,v in value.items %}
+                                 {% if k == 'Bicycle' %}
+                             <td> {{ v }} </td>
+                                 {% endif %}
+                             {% endfor %}
+                          </tr>
+                          {% endfor %}
+                  </tbody>
+                    </table>
+                    </div>
+
+
+
+
+
 
               </div>
           </div>
@@ -241,6 +423,64 @@
     };
 
     obtener_datos_tabla_convertir_en_array('myTable',graficarBarras,'chart','960','480',misParam,true);
+
+
+
+    function piechart(container_name,start,end,table_name,title_name)
+    {
+        console.log(container_name)
+         $(container_name).highcharts({
+
+  data: {
+    table: document.getElementById(table_name),
+
+  },
+
+  chart: {
+    type: 'pie',
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false
+  },
+  legend: {
+    align: 'center',
+    verticalAlign: 'top'
+  },
+  title: {
+    text: title_name
+  },
+  tooltip: {
+       formatter: function() {
+                return '<b>'+ this.series.name +'</b><br/>'+
+                    this.point.y +' '+ this.point.name;
+            }
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        color: '#000000',
+        connectorColor: '#000000',
+        formatter: function() {
+          return '<b>' + this.point.name + '</b>: ' + this.y;
+        },
+
+      },
+      showInLegend: true
+    }
+  },
+
+});
+    }
+    var categories =['Light','Bus','ArticulatedTruck','SingleUnitTruck','Bicycle']
+    for(var i=1;i<6;i++)
+     piechart("#container".concat(i.toString()) , i - 1, i,"myTable".concat(i.toString()),categories[i-1]);
+
+
+
+
 </script>
 </body>
 </html>
