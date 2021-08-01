@@ -123,35 +123,35 @@
           <h3><span class="vehicle-class">Choose Graph</span></h3>
           <li class="graph-type">
             <label class="container">Bar Graph
-              <input type="checkbox" checked="checked">
+              <input type="checkbox" checked="checked" name="c1">
               <span class="checkmark"></span>
             </label>
           </li>
           <li class="graph-type">
             <label class="container">Line Chart
-              <input type="checkbox">
+              <input type="checkbox" name="c1" >
               <span class="checkmark"></span>
             </label>
           </li>
           <li class="graph-type">
             <label class="container">Pie Chart
-              <input type="checkbox">
+              <input type="checkbox" name="c1" >
               <span class="checkmark"></span>
             </label>
           </li>
           <li class="graph-type">
             <label class="container">Funnel Chart
-              <input type="checkbox">
+              <input type="checkbox" name="c1" >
               <span class="checkmark"></span>
             </label>
           </li>
           <li class="graph-type">
             <label class="container">Stacked Graph
-              <input type="checkbox">
+              <input type="checkbox" name="c1">
               <span class="checkmark"></span>
             </label>
           </li>
-          <div class="generate-graphs-button">
+          <div class="generate-graphs-button" onclick="showMe()">
             <a id="actionButton" href="#" class="styled"
               data-loading="Working.." data-finished="Finished!"
               data-type="background-bar">Generate Graphs</a>
@@ -160,20 +160,20 @@
         </div>
           <div class="bottom-right">
               <div class="vis_graph">
-              <canvas id="chart" width="960" height="480" style="border: 1px solid black;">Canvas is not supported</canvas>
-              <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <canvas id="chart" width="960" height="480" style="border: 1px solid black; display:none">Canvas is not supported</canvas>
+              <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto; display:none"></div>
               <hr style="border: none">
 
-              <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto; display:none"></div>
               <hr style="border: none">
 
-               <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+               <div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto; display:none"></div>
               <hr style="border: none">
 
-              <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              <div id="container4" style="min-width: 310px; height: 400px; margin: 0 auto; display:none"></div>
               <hr style="border: none">
 
-               <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+               <div id="container5" style="min-width: 310px; height: 400px; margin: 0 auto; display:none"></div>
               <hr style="border: none">
 
               <div style="display:none">
@@ -477,6 +477,38 @@
     var categories =['Light','Bus','ArticulatedTruck','SingleUnitTruck','Bicycle']
     for(var i=1;i<6;i++)
      piechart("#container".concat(i.toString()) , i - 1, i,"myTable".concat(i.toString()),categories[i-1]);
+
+        function showMe () {
+
+        var chboxs = document.getElementsByName("c1");
+        var vis = "none";
+        if(chboxs[0].checked)
+            document.getElementById("chart").style.display = "block";
+        else
+            document.getElementById("chart").style.display = vis;
+
+        if(chboxs[2].checked)
+        {
+            document.getElementById("container1").style.display = "block";
+             document.getElementById("container2").style.display = "block";
+              document.getElementById("container3").style.display = "block";
+               document.getElementById("container4").style.display = "block";
+                document.getElementById("container5").style.display = "block";
+        }
+
+        else
+        {
+            document.getElementById("container1").style.display = vis;
+            document.getElementById("container2").style.display = vis;
+            document.getElementById("container3").style.display = vis;
+            document.getElementById("container4").style.display = vis;
+            document.getElementById("container5").style.display = vis;
+
+
+        }
+
+
+    }
 
 
 
